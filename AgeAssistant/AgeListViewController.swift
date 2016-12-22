@@ -8,8 +8,17 @@
 
 import UIKit
 
+extension AgeListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+}
+
 class AgeListViewController: UITableViewController, AgeDetailViewControllerDelegate {
     var dataModel: DataModel!
+    var filteredAges = [Age]()
+    let searchController = UISearchController(searchResultsController: nil)
+    
     
     func ageDetailViewControllerDidCancel(_ controller: AgeDetailViewController) {
         dismiss(animated: true, completion: nil)
@@ -30,6 +39,18 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         dismiss(animated: true, completion: nil)
     }
     
+    // Search filter method
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredAges = dataModel.agelist.filter { age in
+            let filteredTags = age.tags.filter { (tag: String) -> Bool in
+                let stringMatch = tag.lowercased().range(of: searchText.lowercased())
+                return stringMatch != nil ? true : false
+            }
+            return age.name.lowercased().contains(searchText.lowercased()) || !filteredTags.isEmpty
+        }
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,14 +58,17 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
 //        let mybirthday = makeDate(year: 1989, month: 8, day: 6)
 //        let myage = Age(name: "Wesley Minner", date: mybirthday!, tags: ["myself", "dog"])
 //        dataModel.agelist.append(myage)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredAges.count
+        }
         return dataModel.agelist.count
     }
 
@@ -58,7 +82,13 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         let age = cell.viewWithTag(2) as! UILabel
         let date = cell.viewWithTag(3) as! UILabel
         let tags = cell.viewWithTag(4) as! UILabel
-        let ageObj = dataModel.agelist[indexPath.row]
+        
+        let ageObj: Age
+        if searchController.isActive && searchController.searchBar.text != "" {
+            ageObj = self.filteredAges[indexPath.row]
+        } else {
+            ageObj = dataModel.agelist[indexPath.row]
+        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
@@ -82,20 +112,18 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.performSegue(withIdentifier: "EditAgeSegue", sender: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    // Edit Age Item
+    // Edit Item
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         performSegue(withIdentifier: "EditAgeSegue", sender: indexPath)
     }
     
-    // Delete Age item
+    // Delete item
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         dataModel.agelist.remove(at: indexPath.row)
-        let indexPaths = [indexPath]
-        tableView.deleteRows(at: indexPaths, with: .automatic)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     override func viewWillAppear(_ animated: Bool) {

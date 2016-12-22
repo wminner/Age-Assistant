@@ -14,7 +14,7 @@ protocol AgeDetailViewControllerDelegate: class {
     func ageDetailViewController(_ controller: AgeDetailViewController, didFinishEditing age: Age)
 }
 
-class AgeDetailViewController: UITableViewController, UITextFieldDelegate {
+class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDetailViewControllerDelegate {
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var dateLabel: UILabel!
@@ -65,6 +65,10 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate {
 //            return nil
 //        }
 //    }
+    
+    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditing age: Age) {
+        
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 && indexPath.row == 1 {
@@ -195,8 +199,13 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        nameField.becomeFirstResponder()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditTagsSegue" {
+            let controller = segue.destination as! TagDetailViewController
+            controller.delegate = self
+            if let tags = self.ageToEdit?.tags {
+                controller.tags = Array(tags)
+            }
+        }
     }
 }
