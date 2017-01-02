@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func saveData() {
         dataModel.saveAgelist()
+        dataModel.saveTaglist()
     }
 
     

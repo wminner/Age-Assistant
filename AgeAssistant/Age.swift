@@ -98,10 +98,27 @@ class Age: NSObject, NSCoding {
         }
     }
     
+    func clearTags() {
+        self.tags = Set<String>()
+    }
+    
     // Static method to calculate age in years from given date
     class func calculateAge(_ fromDate: Date) -> Int {
         let calendar: Calendar = Calendar.current
         let ageComponents = calendar.dateComponents([.year], from: fromDate, to: Date())
         return ageComponents.year!
+    }
+    
+    // Pass in array of tags to get formatted tagsString
+    class func formTagsString(_ tagArray: [String]) -> String {
+        var tagsString = ""
+        if tagArray.count != 0 {
+            for tag in tagArray {
+                tagsString += "\(tag), "
+            }
+            // Remove trailing comma and space
+            tagsString = tagsString.substring(to: tagsString.index(tagsString.endIndex, offsetBy: -2))
+        }
+        return tagsString
     }
 }

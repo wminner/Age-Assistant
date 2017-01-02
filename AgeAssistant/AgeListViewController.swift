@@ -98,15 +98,15 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         age.text = "Age: \(ageObj.age)"
         date.text = "Date: \(formattedDate)"
         
-        var tagsString = "Tags:"
-        for tag in ageObj.tags {
-            tagsString += " \(tag),"
-        }
-        // Remove the trailing comma
-        if ageObj.tags.count != 0 {
-            tagsString.remove(at: tagsString.index(before: tagsString.endIndex))
-        }
-        tags.text = tagsString
+        let tagsString = "Tags: "
+//        for tag in ageObj.tags {
+//            tagsString += " \(tag),"
+//        }
+//        // Remove the trailing comma
+//        if ageObj.tags.count != 0 {
+//            tagsString.remove(at: tagsString.index(before: tagsString.endIndex))
+//        }
+        tags.text = tagsString + Age.formTagsString(ageObj.tags.sorted())
 
         return cell
     }

@@ -9,12 +9,13 @@
 import UIKit
 
 protocol TagDetailViewControllerDelegate: class {
-    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith tags: [String])
+    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith newtags: [String])
 }
 
 class TagDetailViewController: UITableViewController, UITextFieldDelegate {
     weak var delegate: TagDetailViewControllerDelegate?
-    var tags: [String]?
+    var tags = [String]()
+    var tagSelection = [Bool]()
     var allTags = [String]()
     var dataModel: DataModel!
     var currentlyEditing: IndexPath?    // IndexPath of the cell being edited (either via add or cell select)
@@ -25,11 +26,10 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         tableView.endEditing(false)
         
         tableView.beginUpdates()
-        // dataModel?.taglist.append("")
         allTags.append("")
+        tagSelection.append(false)
         let indexPath = IndexPath(row: allTags.count-1, section: 0)
         currentlyEditing = indexPath
-        
         tableView.insertRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
         
@@ -38,28 +38,41 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
     
-//    func toggleTagChecked(for cell: UITableViewCell, at indexPath: IndexPath) {
-//        let row = indexPath.row
-//        let label = cell.viewWithTag(2) as! UILabel
-//        
-//        let checked = tagSelection[row]
-//        if checked {
-//            label.text = ""
-//            tagSelection[row] = false
-//        } else {
-//            label.text = "√"
-//            tagSelection[row] = true
-//        }
-//    }
+    func initializeTagSelection() {
+        for tag in allTags {
+            tags.contains(tag) ? tagSelection.append(true) : tagSelection.append(false)
+        }
+    }
     
-    func sortTaglist() {
-        allTags.sort(by: { tag1, tag2 in
-            return tag1.localizedStandardCompare(tag2) == .orderedAscending })
+    func toggleTagChecked(for cell: UITableViewCell, at indexPath: IndexPath) {
+        let row = indexPath.row
+        let label = cell.viewWithTag(2) as! UILabel
+        
+        let checked = tagSelection[row]
+        if checked {
+            label.text = ""
+            tagSelection[row] = false
+        } else {
+            label.text = "√"
+            tagSelection[row] = true
+        }
+    }
+    
+    func exportTags() {
+        // Reset tags array to empty
+        tags = [String]()
+        // Grab each checked tag in allTags and put into tags array
+        for (index, checked) in tagSelection.enumerated() {
+            if checked {
+                tags.append(allTags[index])
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         allTags = dataModel.taglist
+        initializeTagSelection()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,57 +82,60 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         tableView.endEditing(false)
         
         if (self.isMovingFromParentViewController) {
-            sortTaglist()
             // Copy allTags into dataModel
             dataModel.taglist = allTags
-            delegate?.tagdetailViewController(self, didFinishEditingAgeWith: tags!)
+            dataModel.sortTaglist()
+            
+            // Find all checked tags and fill out tags array
+            exportTags()
+            
+            delegate?.tagdetailViewController(self, didFinishEditingAgeWith: tags)
         }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if let taglist = dataModel?.taglist {
-//            return taglist.count
-//        } else {
-//            return 0
-//        }
         return allTags.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TagTable", for: indexPath)
-//        if let allTags = dataModel?.taglist {
-//            let tag = allTags[indexPath.row]
-//            let textField = cell.viewWithTag(1) as! UITextField
-//            textField.text = tag
-//            textField.delegate = self
-//        }
         let tag = allTags[indexPath.row]
+        let check = tagSelection[indexPath.row]
         let textField = cell.viewWithTag(1) as! UITextField
+        let checkField = cell.viewWithTag(2) as! UILabel
         textField.text = tag
         textField.delegate = self
+        checkField.text = check ? "√" : ""
         
         return cell
     }
     
     // Select cell (toggle checkmark)
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let cell = tableView.cellForRow(at: indexPath) {
-//            toggleTagChecked(for: cell, at: indexPath)
-//        }
         // Force any edits in progress to stop
         tableView.endEditing(false)
         
-        currentlyEditing = indexPath
-        let textField = tableView.cellForRow(at: indexPath)?.viewWithTag(1) as! UITextField
-        textField.isUserInteractionEnabled = true
-        textField.becomeFirstResponder()
+        // Toggle checkmark on tag
+        if let cell = tableView.cellForRow(at: indexPath) {
+            toggleTagChecked(for: cell, at: indexPath)
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // Delete tag
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         allTags.remove(at: indexPath.row)
+        tagSelection.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .none)
+    }
+    
+    // Tap accessory button to edit tag
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        currentlyEditing = indexPath
+        let textField = tableView.cellForRow(at: indexPath)?.viewWithTag(1) as! UITextField
+        textField.isUserInteractionEnabled = true
+        textField.becomeFirstResponder()
     }
     
     // TextField methods
@@ -130,6 +146,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
             tableView.beginUpdates()
             // let indexPath = IndexPath(row: allTags.count-1, section: 0)
             allTags.remove(at: currentlyEditing!.row)
+            tagSelection.remove(at: currentlyEditing!.row)
             tableView.deleteRows(at: [currentlyEditing!], with: .none)
             tableView.endUpdates()
         } else {
@@ -147,5 +164,11 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         } else {
             return true
         }
+    }
+    
+    // End editing text field when return key is pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

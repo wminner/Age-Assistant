@@ -26,7 +26,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
     var dataModel: DataModel!
     var ageToEdit: Age?
     var date = Date()
-    var taglist = [String]()
+    var tags = [String]()
     var datePickerVisible = false
     weak var delegate: AgeDetailViewControllerDelegate?
     
@@ -35,19 +35,22 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
     }
     
     @IBAction func done() {
+        // Edit age object
         if let item = ageToEdit {
             item.name = nameField.text!
             item.date = date
             let _ = item.updateAge()
             
-            delegate?.ageDetailViewController(self, didFinishEditing: item)
-        } else {
-            let name = nameField.text!
-            parseTags()
-            let item = Age(name: name, date: date)
-            for tag in taglist {
+            item.clearTags()
+            for tag in tags {
                 item.addTag(tag)
             }
+            delegate?.ageDetailViewController(self, didFinishEditing: item)
+        
+        // Create new age object
+        } else {
+            let name = nameField.text!
+            let item = Age(name: name, date: date, tags: tags)
             
             delegate?.ageDetailViewController(self, didFinishAdding: item)
         }
@@ -59,16 +62,9 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
         updateAgeLabel()
     }
     
-//    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-//        if indexPath.section == 1 && indexPath.row == 1 {
-//            return indexPath
-//        } else {
-//            return nil
-//        }
-//    }
-    
-    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith tags: [String]) {
-        
+    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith newtags: [String]) {
+        tags = newtags
+        updateTagsLabel()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -130,10 +126,21 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
         ageLabel.text = "Age: \(age_update)"
     }
     
-    func parseTags() {
-        // TODO
-        // Parse tag field into an array of strings
+    func updateTagsLabel() {
+        tagsLabel.text = Age.formTagsString(tags)
     }
+    
+//    func formTagsString() -> String {
+//        var tagsString = ""
+//        if tags.count != 0 {
+//            for tag in tags {
+//                tagsString += "\(tag), "
+//            }
+//            // Remove trailing comma and space
+//            tagsString = tagsString.substring(to: tagsString.index(tagsString.endIndex, offsetBy: -2))
+//        }
+//        return tagsString
+//    }
     
     func showDatePicker() {
         datePickerVisible = true
@@ -184,16 +191,9 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
             updateDateLabel()
 
             // Tags
-            var tagsString = ""
-            for tag in item.tags {
-                taglist.append(tag)
-                tagsString += "\(tag), "
-            }
-            // Remove the trailing comma
-            if tagsString != "" {
-                tagsString = tagsString.substring(to: tagsString.index(tagsString.endIndex, offsetBy: -2))
-            }
-            tagsLabel.text = tagsString
+            tags = Array(item.tags)
+            tagsLabel.text = Age.formTagsString(tags)
+            
         } else {
             updateDateLabel()
             tagsLabel.text = ""
@@ -204,9 +204,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
         if segue.identifier == "EditTagsSegue" {
             let controller = segue.destination as! TagDetailViewController
             controller.delegate = self
-            if let tags = self.ageToEdit?.tags {
-                controller.tags = Array(tags)
-            }
+            controller.tags = tags
             controller.dataModel = dataModel
         }
     }

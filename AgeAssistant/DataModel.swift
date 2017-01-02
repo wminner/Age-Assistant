@@ -23,6 +23,7 @@ class DataModel {
     
     init() {
         loadAgelist()
+        loadTaglist()
         registerDefaults()
         print(documentsDirectory())
     }
@@ -33,8 +34,12 @@ class DataModel {
         return paths[0]
     }
     
-    func dataFilePath() -> URL {
+    func ageFilePath() -> URL {
         return documentsDirectory().appendingPathComponent("Ages.plist")
+    }
+    
+    func tagFilePath() -> URL {
+        return documentsDirectory().appendingPathComponent("Tags.plist")
     }
     
     func saveAgelist() {
@@ -42,16 +47,34 @@ class DataModel {
         let archiver = NSKeyedArchiver(forWritingWith: data)
         archiver.encode(agelist, forKey: "Ages")
         archiver.finishEncoding()
-        data.write(to: dataFilePath(), atomically: true)
+        data.write(to: ageFilePath(), atomically: true)
     }
     
     func loadAgelist() {
-        let path = dataFilePath()
+        let path = ageFilePath()
         if let data = try? Data(contentsOf: path) {
             let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
             agelist = unarchiver.decodeObject(forKey: "Ages") as! [Age]
             unarchiver.finishDecoding()
             sortAgelist()
+        }
+    }
+    
+    func saveTaglist() {
+        let data = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWith: data)
+        archiver.encode(taglist, forKey: "Tags")
+        archiver.finishEncoding()
+        data.write(to: tagFilePath(), atomically: true)
+    }
+    
+    func loadTaglist() {
+        let path = tagFilePath()
+        if let data = try? Data(contentsOf: path) {
+            let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
+            taglist = unarchiver.decodeObject(forKey: "Tags") as! [String]
+            unarchiver.finishDecoding()
+            sortTaglist()
         }
     }
     
@@ -64,6 +87,11 @@ class DataModel {
     func sortAgelist() {
         agelist.sort(by: { age1, age2 in
             return age1.name.localizedStandardCompare(age2.name) == .orderedAscending })
+    }
+    
+    func sortTaglist() {
+        taglist.sort(by: { tag1, tag2 in
+            return tag1.localizedStandardCompare(tag2) == .orderedAscending })
     }
     
     class func nextAgeID() -> Int {
