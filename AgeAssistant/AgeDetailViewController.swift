@@ -23,6 +23,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
     @IBOutlet weak var datePickerCell: UITableViewCell!
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    var dataModel: DataModel!
     var ageToEdit: Age?
     var date = Date()
     var taglist = [String]()
@@ -66,7 +67,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
 //        }
 //    }
     
-    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditing age: Age) {
+    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith tags: [String]) {
         
     }
     
@@ -206,6 +207,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
             if let tags = self.ageToEdit?.tags {
                 controller.tags = Array(tags)
             }
+            controller.dataModel = dataModel
         }
     }
 }

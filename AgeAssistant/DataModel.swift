@@ -10,6 +10,7 @@ import Foundation
 
 class DataModel {
     var agelist = [Age]()
+    var taglist = [String]()
     
     var indexOfSelectedAge: Int {
         get {

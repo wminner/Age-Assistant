@@ -349,11 +349,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d0C-cf-VIc">
+                                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Label" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d0C-cf-VIc">
                                             <rect key="frame" x="15" y="6" width="344" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                         </textField>
                                     </subviews>

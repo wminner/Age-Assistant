@@ -46,7 +46,7 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
                 let stringMatch = tag.lowercased().range(of: searchText.lowercased())
                 return stringMatch != nil ? true : false
             }
-            return age.name.lowercased().contains(searchText.lowercased()) || !filteredTags.isEmpty
+            return age.name.lowercased().contains(searchText.lowercased()) || !filteredTags.isEmpty || String(age.age).contains(searchText.lowercased())
         }
         tableView.reloadData()
     }
@@ -77,7 +77,7 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainTable", for: indexPath)
 
         // Configure the cell...
-        cell.accessoryType = .detailDisclosureButton
+        // cell.accessoryType = .detailDisclosureButton
         let name = cell.viewWithTag(1) as! UILabel
         let age = cell.viewWithTag(2) as! UILabel
         let date = cell.viewWithTag(3) as! UILabel
@@ -111,14 +111,15 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
     // Edit Item
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "EditAgeSegue", sender: indexPath)
     }
+    
+//    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+//        performSegue(withIdentifier: "EditAgeSegue", sender: indexPath)
+//    }
     
     // Delete item
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -135,12 +136,15 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         if segue.identifier == "AddAgeSegue" {
             let navigationController = segue.destination as! UINavigationController
             let controller = navigationController.topViewController as! AgeDetailViewController
+            
             controller.delegate = self
+            controller.dataModel = dataModel
         } else if segue.identifier == "EditAgeSegue" {
             let navigationController = segue.destination as! UINavigationController
             let controller = navigationController.topViewController as! AgeDetailViewController
             
             controller.delegate = self
+            controller.dataModel = dataModel
             if let indexPath = sender as? IndexPath {
                 controller.ageToEdit = dataModel.agelist[indexPath.row]
             }
