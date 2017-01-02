@@ -53,12 +53,7 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Add an entry to the Age object's list for testing
-//        let mybirthday = makeDate(year: 1989, month: 8, day: 6)
-//        let myage = Age(name: "Wesley Minner", date: mybirthday!, tags: ["myself", "dog"])
-//        dataModel.agelist.append(myage)
-        
+                
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
@@ -99,14 +94,7 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         date.text = "Date: \(formattedDate)"
         
         let tagsString = "Tags: "
-//        for tag in ageObj.tags {
-//            tagsString += " \(tag),"
-//        }
-//        // Remove the trailing comma
-//        if ageObj.tags.count != 0 {
-//            tagsString.remove(at: tagsString.index(before: tagsString.endIndex))
-//        }
-        tags.text = tagsString + Age.formTagsString(ageObj.tags.sorted())
+        tags.text = tagsString + Age.formTagsString(ageObj.tags)
 
         return cell
     }
@@ -116,10 +104,6 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         // tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "EditAgeSegue", sender: indexPath)
     }
-    
-//    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-//        performSegue(withIdentifier: "EditAgeSegue", sender: indexPath)
-//    }
     
     // Delete item
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

@@ -110,10 +110,10 @@ class Age: NSObject, NSCoding {
     }
     
     // Pass in array of tags to get formatted tagsString
-    class func formTagsString(_ tagArray: [String]) -> String {
+    class func formTagsString(_ tagSet: Set<String>) -> String {
         var tagsString = ""
-        if tagArray.count != 0 {
-            for tag in tagArray {
+        if tagSet.count != 0 {
+            for tag in tagSet.sorted() {
                 tagsString += "\(tag), "
             }
             // Remove trailing comma and space

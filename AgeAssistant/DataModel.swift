@@ -10,7 +10,7 @@ import Foundation
 
 class DataModel {
     var agelist = [Age]()
-    var taglist = [String]()
+    var taglist = Set<String>()
     
     var indexOfSelectedAge: Int {
         get {
@@ -72,9 +72,8 @@ class DataModel {
         let path = tagFilePath()
         if let data = try? Data(contentsOf: path) {
             let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
-            taglist = unarchiver.decodeObject(forKey: "Tags") as! [String]
+            taglist = unarchiver.decodeObject(forKey: "Tags") as! Set<String>
             unarchiver.finishDecoding()
-            sortTaglist()
         }
     }
     
@@ -87,11 +86,6 @@ class DataModel {
     func sortAgelist() {
         agelist.sort(by: { age1, age2 in
             return age1.name.localizedStandardCompare(age2.name) == .orderedAscending })
-    }
-    
-    func sortTaglist() {
-        taglist.sort(by: { tag1, tag2 in
-            return tag1.localizedStandardCompare(tag2) == .orderedAscending })
     }
     
     class func nextAgeID() -> Int {

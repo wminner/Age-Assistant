@@ -27,7 +27,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         
         tableView.beginUpdates()
         allTags.append("")
-        tagSelection.append(false)
+        tagSelection.append(true)
         let indexPath = IndexPath(row: allTags.count-1, section: 0)
         currentlyEditing = indexPath
         tableView.insertRows(at: [indexPath], with: .automatic)
@@ -71,7 +71,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        allTags = dataModel.taglist
+        allTags = dataModel.taglist.sorted()
         initializeTagSelection()
     }
     
@@ -83,9 +83,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         
         if (self.isMovingFromParentViewController) {
             // Copy allTags into dataModel
-            dataModel.taglist = allTags
-            dataModel.sortTaglist()
-            
+            dataModel.taglist = Set(allTags)
             // Find all checked tags and fill out tags array
             exportTags()
             
