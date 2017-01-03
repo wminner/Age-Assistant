@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TagDetailViewControllerDelegate: class {
-    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith newtags: [String])
+    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith newTags: [String], editedTags editTags: [(start:String, end:String)], deletedTags delTags: [String])
 }
 
 class TagDetailViewController: UITableViewController, UITextFieldDelegate {
@@ -18,7 +18,11 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
     var tagSelection = [Bool]()
     var allTags = [String]()
     var dataModel: DataModel!
-    var currentlyEditing: IndexPath?    // IndexPath of the cell being edited (either via add or cell select)
+    var editingIndexPath: IndexPath?    // IndexPath of the cell being edited (either via add or cell select)
+    var editingStartTag: String?
+    
+    var editTags = [(start:String, end:String)]()
+    var delTags = [String]()
     
     
     @IBAction func addNewTag() {
@@ -29,7 +33,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         allTags.append("")
         tagSelection.append(true)
         let indexPath = IndexPath(row: allTags.count-1, section: 0)
-        currentlyEditing = indexPath
+        editingIndexPath = indexPath
         tableView.insertRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
         
@@ -58,6 +62,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
+    // Copy all checked tags in the allTags array into tags for passing back to parent view
     func exportTags() {
         // Reset tags array to empty
         tags = [String]()
@@ -87,7 +92,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
             // Find all checked tags and fill out tags array
             exportTags()
             
-            delegate?.tagdetailViewController(self, didFinishEditingAgeWith: tags)
+            delegate?.tagdetailViewController(self, didFinishEditingAgeWith: tags, editedTags: editTags, deletedTags: delTags)
         }
     }
 
@@ -123,35 +128,47 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
     
     // Delete tag
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        // Add tag to deleted tags list if it is in the main taglist (for cleaning up other Age objects later)
+        if let cell = tableView.cellForRow(at: indexPath), let tag = (cell.viewWithTag(1) as! UITextField).text {
+            delTags.append(tag)
+        }
         allTags.remove(at: indexPath.row)
         tagSelection.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .none)
+        print(delTags)
     }
     
-    // Tap accessory button to edit tag
+    // Taps accessory button to edit tag
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        currentlyEditing = indexPath
         let textField = tableView.cellForRow(at: indexPath)?.viewWithTag(1) as! UITextField
+        editingStartTag = textField.text
+        editingIndexPath = indexPath
         textField.isUserInteractionEnabled = true
         textField.becomeFirstResponder()
     }
     
     // TextField methods
-    // TODO bug when user edits a tag in the middle to be empty string
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
+            if dataModel.taglist.contains(editingStartTag!) {
+                delTags.append(editingStartTag!)
+            }
+            
             // Delete the row discretely
             tableView.beginUpdates()
-            // let indexPath = IndexPath(row: allTags.count-1, section: 0)
-            allTags.remove(at: currentlyEditing!.row)
-            tagSelection.remove(at: currentlyEditing!.row)
-            tableView.deleteRows(at: [currentlyEditing!], with: .none)
+            allTags.remove(at: editingIndexPath!.row)
+            tagSelection.remove(at: editingIndexPath!.row)
+            tableView.deleteRows(at: [editingIndexPath!], with: .none)
             tableView.endUpdates()
         } else {
-            allTags[currentlyEditing!.row] = textField.text!
+            // Add tag to the edited tags list, for cleaning up other Age objects later
+            editTags.append((editingStartTag!, textField.text!))
+            allTags[editingIndexPath!.row] = textField.text!
         }
-        currentlyEditing = nil
+        editingIndexPath = nil
+        editingStartTag = nil
         textField.isUserInteractionEnabled = false
+        print(editTags)
         
     }
     

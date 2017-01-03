@@ -62,8 +62,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
         updateAgeLabel()
     }
     
-    // func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith newTags: [String], editedTags editTags: [String], deletedTags delTags: [String]) {
-    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith newTags: [String]) {
+    func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith newTags: [String], editedTags editTags: [(start:String, end:String)], deletedTags delTags: [String]) {
         tags = Set(newTags)
         updateTagsLabel()
     }
