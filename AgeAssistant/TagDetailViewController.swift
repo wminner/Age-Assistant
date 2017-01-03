@@ -135,7 +135,6 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         allTags.remove(at: indexPath.row)
         tagSelection.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .none)
-        print(delTags)
     }
     
     // Taps accessory button to edit tag
@@ -168,7 +167,6 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         editingIndexPath = nil
         editingStartTag = nil
         textField.isUserInteractionEnabled = false
-        print(editTags)
         
     }
     

@@ -71,7 +71,7 @@ class Age: NSObject, NSCoding {
         let age_result = Age.calculateAge(date)
         if age_result >= 0 {
             self.age = age_result
-            print("Assigning age of \(self.name) to \(self.age).")
+            // print("Assigning age of \(self.name) to \(self.age).")
             return true
         } else {
             return false
@@ -91,7 +91,7 @@ class Age: NSObject, NSCoding {
     // Remove a tag from the object
     // Returns true if tag was found and removed, otherwise false
     func removeTag(_ tag: String) -> Bool {
-        if let _ = self.tags.remove(tag) {
+        if self.tags.remove(tag) != nil {
             return true
         } else {
             return false

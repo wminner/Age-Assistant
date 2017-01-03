@@ -10,8 +10,8 @@ import UIKit
 
 protocol AgeDetailViewControllerDelegate: class {
     func ageDetailViewControllerDidCancel(_ controller: AgeDetailViewController)
-    func ageDetailViewController(_ controller: AgeDetailViewController, didFinishAdding age: Age)
-    func ageDetailViewController(_ controller: AgeDetailViewController, didFinishEditing age: Age)
+    func ageDetailViewController(_ controller: AgeDetailViewController, didFinishAdding age: Age, editedTags editTags: [(start:String, end:String)], deletedTags delTags: [String])
+    func ageDetailViewController(_ controller: AgeDetailViewController, didFinishEditing age: Age, editedTags editTags: [(start:String, end:String)], deletedTags delTags: [String])
 }
 
 class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDetailViewControllerDelegate {
@@ -28,6 +28,8 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
     var date = Date()
     var tags = Set<String>()
     var datePickerVisible = false
+    var editTags = [(start:String, end:String)]()
+    var delTags = [String]()
     weak var delegate: AgeDetailViewControllerDelegate?
     
     @IBAction func cancel() {
@@ -45,14 +47,14 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
             for tag in tags {
                 item.addTag(tag)
             }
-            delegate?.ageDetailViewController(self, didFinishEditing: item)
+            delegate?.ageDetailViewController(self, didFinishEditing: item, editedTags: editTags, deletedTags: delTags)
         
         // Create new age object
         } else {
             let name = nameField.text!
             let item = Age(name: name, date: date, tags: Array(tags))
             
-            delegate?.ageDetailViewController(self, didFinishAdding: item)
+            delegate?.ageDetailViewController(self, didFinishAdding: item, editedTags: editTags, deletedTags: delTags)
         }
     }
     
@@ -63,7 +65,9 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
     }
     
     func tagdetailViewController(_ controller: TagDetailViewController, didFinishEditingAgeWith newTags: [String], editedTags editTags: [(start:String, end:String)], deletedTags delTags: [String]) {
-        tags = Set(newTags)
+        self.tags = Set(newTags)
+        self.editTags = editTags
+        self.delTags = delTags
         updateTagsLabel()
     }
     
@@ -84,7 +88,6 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // print("request height at section \(indexPath.section), row \(indexPath.row)")
         if indexPath.section == 1 && indexPath.row == 1 {
             return 217
         } else {
@@ -129,18 +132,6 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
     func updateTagsLabel() {
         tagsLabel.text = Age.formTagsString(tags)
     }
-    
-//    func formTagsString() -> String {
-//        var tagsString = ""
-//        if tags.count != 0 {
-//            for tag in tags {
-//                tagsString += "\(tag), "
-//            }
-//            // Remove trailing comma and space
-//            tagsString = tagsString.substring(to: tagsString.index(tagsString.endIndex, offsetBy: -2))
-//        }
-//        return tagsString
-//    }
     
     func showDatePicker() {
         datePickerVisible = true

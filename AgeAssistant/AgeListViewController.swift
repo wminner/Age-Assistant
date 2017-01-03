@@ -24,17 +24,25 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         dismiss(animated: true, completion: nil)
     }
     
-    func ageDetailViewController(_ controller: AgeDetailViewController, didFinishAdding age: Age) {
+    func ageDetailViewController(_ controller: AgeDetailViewController, didFinishAdding age: Age, editedTags editTags: [(start:String, end:String)], deletedTags delTags: [String]) {
         // Insert new age into list and sort list
         dataModel.agelist.append(age)
         dataModel.sortAgelist()
+        // Update and delete tags
+        cleanUp(editedTags: editTags)
+        cleanUp(deletedTags: delTags)
+        
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
     
-    func ageDetailViewController(_ controller: AgeDetailViewController, didFinishEditing age: Age) {
+    func ageDetailViewController(_ controller: AgeDetailViewController, didFinishEditing age: Age, editedTags editTags: [(start:String, end:String)], deletedTags delTags: [String]) {
         // Update the entry in table and re-sort list
         dataModel.sortAgelist()
+        // Update and delete tags
+        cleanUp(editedTags: editTags)
+        cleanUp(deletedTags: delTags)
+        
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
@@ -49,6 +57,26 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
             return age.name.lowercased().contains(searchText.lowercased()) || !filteredTags.isEmpty || String(age.age).contains(searchText.lowercased())
         }
         tableView.reloadData()
+    }
+    
+    // Always call this before cleanUpDeletedTags, in case user edits before finally deleting tag
+    func cleanUp(editedTags editTags: [(start:String, end:String)]) {
+        for age in dataModel.agelist {
+            for (startTag, endTag) in editTags {
+                if age.tags.remove(startTag) != nil {
+                    age.tags.insert(endTag)
+                }
+            }
+        }
+    }
+    
+    // Delete tags from all Age objects that were deleted from the main taglist
+    func cleanUp(deletedTags delTags: [String]) {
+        for age in dataModel.agelist {
+            for tag in delTags {
+                let _ = age.tags.remove(tag)
+            }
+        }
     }
     
     override func viewDidLoad() {
