@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let navigationController = window!.rootViewController as! UINavigationController
-        let controller = navigationController.viewControllers[0] as! AgeListViewController
+        let controller = navigationController.viewControllers[0] as! StartViewController
         controller.dataModel = dataModel
         
         return true

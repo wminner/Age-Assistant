@@ -20,6 +20,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
     var dataModel: DataModel!
     var editingIndexPath: IndexPath?    // IndexPath of the cell being edited (either via add or cell select)
     var editingStartTag: String?
+    var addingTag = false
     
     var editTags = [(start:String, end:String)]()
     var delTags = [String]()
@@ -34,6 +35,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         tagSelection.append(true)
         let indexPath = IndexPath(row: allTags.count-1, section: 0)
         editingIndexPath = indexPath
+        addingTag = true
         tableView.insertRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
         
@@ -161,7 +163,11 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
             tableView.endUpdates()
         } else {
             // Add tag to the edited tags list, for cleaning up other Age objects later
-            editTags.append((editingStartTag!, textField.text!))
+            if !addingTag {
+                editTags.append((editingStartTag!, textField.text!))
+            } else {
+                addingTag = false
+            }
             allTags[editingIndexPath!.row] = textField.text!
         }
         editingIndexPath = nil

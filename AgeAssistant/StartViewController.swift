@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  StartViewController.swift
 //  AgeAssistant
 //
 //  Created by Wesley Minner on 9/4/16.
@@ -10,16 +10,13 @@ import UIKit
 
 class StartViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    var dataModel: DataModel!
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "StartSegue" {
+            let controller = segue.destination as! AgeListViewController            
+            controller.dataModel = dataModel
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
