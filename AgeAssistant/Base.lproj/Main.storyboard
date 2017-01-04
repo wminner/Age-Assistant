@@ -28,16 +28,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age Assistant" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoC-RJ-mZN">
-                                <rect key="frame" x="15" y="71" width="343" height="69"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="69" id="sUA-2M-bS4"/>
-                                </constraints>
+                                <rect key="frame" x="15" y="110" width="343" height="69"/>
                                 <fontDescription key="fontDescription" name="BalsamiqSans" family="Balsamiq Sans" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Wesley Minner" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xS-gW-OdT">
-                                <rect key="frame" x="0.0" y="140" width="374" height="45"/>
+                                <rect key="frame" x="103" y="179" width="169" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="uLx-rJ-rjA"/>
                                 </constraints>
@@ -46,7 +43,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dog" translatesAutoresizingMaskIntoConstraints="NO" id="9x2-c7-1ag">
-                                <rect key="frame" x="-74" y="359" width="230" height="230"/>
+                                <rect key="frame" x="-84" y="360" width="230" height="230"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="b3n-3b-dyt"/>
                                     <constraint firstAttribute="height" constant="230" id="fPY-K2-JH4"/>
@@ -60,13 +57,13 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6S-h9-iJD">
-                                <rect key="frame" x="119" y="216" width="137" height="48"/>
+                                <rect key="frame" x="119" y="250" width="137" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="137" id="3OI-E0-OvF"/>
                                     <constraint firstAttribute="height" constant="48" id="aTu-gg-l5t"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BalsamiqSans" family="Balsamiq Sans" pointSize="21"/>
-                                <state key="normal" title="Get Started"/>
+                                <state key="normal" title="Continue"/>
                                 <connections>
                                     <segue destination="qSO-Q1-ZXn" kind="show" identifier="StartSegue" id="Y7l-bX-Dlg"/>
                                 </connections>
@@ -93,29 +90,31 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="9xS-gW-OdT" firstAttribute="top" secondItem="yoC-RJ-mZN" secondAttribute="bottom" id="10w-6e-46q"/>
                             <constraint firstItem="X6S-h9-iJD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2cN-IM-Zqc"/>
                             <constraint firstItem="KCa-FL-rdC" firstAttribute="top" secondItem="dax-bU-gET" secondAttribute="bottom" constant="25" id="421-JE-7uh"/>
-                            <constraint firstItem="yoC-RJ-mZN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="51" id="8KP-gQ-QyH"/>
-                            <constraint firstItem="9x2-c7-1ag" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-74" id="CDQ-uh-Vio"/>
+                            <constraint firstItem="yoC-RJ-mZN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-1" id="5RU-LD-AK0"/>
+                            <constraint firstItem="9x2-c7-1ag" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-84" id="CDQ-uh-Vio"/>
                             <constraint firstItem="X6S-h9-iJD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CX1-DI-4yS"/>
-                            <constraint firstItem="9x2-c7-1ag" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-74" id="Cku-7J-PUu"/>
-                            <constraint firstItem="PWR-zr-8Kn" firstAttribute="top" secondItem="9x2-c7-1ag" secondAttribute="bottom" constant="8" id="HyS-dX-SQ5"/>
+                            <constraint firstItem="9x2-c7-1ag" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-84" id="Cku-7J-PUu"/>
+                            <constraint firstItem="PWR-zr-8Kn" firstAttribute="top" secondItem="9x2-c7-1ag" secondAttribute="bottom" constant="7" id="HyS-dX-SQ5"/>
                             <constraint firstAttribute="trailing" secondItem="dax-bU-gET" secondAttribute="trailing" constant="-42" id="IFU-MO-0FK"/>
+                            <constraint firstItem="9xS-gW-OdT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kmh-xm-Y1R"/>
                             <constraint firstAttribute="trailing" secondItem="dax-bU-gET" secondAttribute="trailing" constant="-42" id="LzX-81-WFk"/>
                             <constraint firstAttribute="trailing" secondItem="KCa-FL-rdC" secondAttribute="trailing" constant="16" id="S0n-hs-8gZ"/>
                             <constraint firstItem="PWR-zr-8Kn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="STt-ou-QEM"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="KCa-FL-rdC" secondAttribute="bottom" constant="20" id="Tgb-sE-FTw"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="yoC-RJ-mZN" secondAttribute="trailing" constant="1" id="Vnt-Mz-8pt"/>
-                            <constraint firstItem="X6S-h9-iJD" firstAttribute="top" secondItem="9xS-gW-OdT" secondAttribute="bottom" constant="31" id="Y32-c5-yVu"/>
-                            <constraint firstItem="yoC-RJ-mZN" firstAttribute="trailing" secondItem="9xS-gW-OdT" secondAttribute="trailing" constant="-16" id="dqf-Oa-CtP"/>
-                            <constraint firstItem="yoC-RJ-mZN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-1" id="eTb-Su-DIO"/>
-                            <constraint firstItem="yoC-RJ-mZN" firstAttribute="leading" secondItem="9xS-gW-OdT" secondAttribute="leading" constant="15" id="klD-wT-5m9"/>
-                            <constraint firstItem="9xS-gW-OdT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="120" id="pim-Mh-Hvx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yoC-RJ-mZN" secondAttribute="trailing" constant="1" id="Wax-sB-T1j"/>
+                            <constraint firstItem="X6S-h9-iJD" firstAttribute="top" secondItem="9xS-gW-OdT" secondAttribute="bottom" constant="26" id="pL4-cs-feW"/>
+                            <constraint firstItem="9xS-gW-OdT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="115" id="pim-Mh-Hvx"/>
+                            <constraint firstItem="yoC-RJ-mZN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="46" id="tB4-ka-gk6"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PWR-zr-8Kn" secondAttribute="bottom" constant="20" id="xGp-x6-8Wg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="41b-Ga-ayE"/>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="startButton" destination="X6S-h9-iJD" id="SpJ-ah-RNj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -338,7 +337,7 @@
         <scene sceneID="haE-Gm-j6r">
             <objects>
                 <navigationController id="3Ml-8R-fEp" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pby-p9-kmh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pby-p9-kmh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

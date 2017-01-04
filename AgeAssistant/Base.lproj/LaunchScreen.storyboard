@@ -26,30 +26,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dog" translatesAutoresizingMaskIntoConstraints="NO" id="VAg-sZ-pGa">
-                                <rect key="frame" x="-78" y="388" width="230" height="230"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dog" translatesAutoresizingMaskIntoConstraints="NO" id="VAg-sZ-pGa">
+                                <rect key="frame" x="-84" y="360" width="230" height="230"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="GQp-Rb-bw7"/>
+                                    <constraint firstAttribute="width" constant="230" id="tWU-Ee-0b6"/>
+                                </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cake" translatesAutoresizingMaskIntoConstraints="NO" id="bqi-Jp-XVa">
-                                <rect key="frame" x="221" y="405" width="196" height="196"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cake" translatesAutoresizingMaskIntoConstraints="NO" id="bqi-Jp-XVa">
+                                <rect key="frame" x="221" y="376" width="196" height="196"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="196" id="8a6-SP-YiK"/>
+                                    <constraint firstAttribute="height" constant="196" id="Idh-U1-tEq"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Age Assistant" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Sp-6B-hYg">
-                                <rect key="frame" x="16" y="80" width="343" height="69"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age Assistant" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Sp-6B-hYg">
+                                <rect key="frame" x="15" y="110" width="343" height="69"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="9Gz-ne-Np9"/>
+                                    <constraint firstAttribute="width" constant="343" id="Icv-Xn-nx2"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="BalsamiqSans" family="Balsamiq Sans" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ht7-q2-bRL">
-                                <rect key="frame" x="117" y="224" width="140" height="71"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ht7-q2-bRL">
+                                <rect key="frame" x="119" y="223" width="137" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="FhN-AO-ecK"/>
+                                    <constraint firstAttribute="width" constant="137" id="x2T-8R-B2O"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1Sp-6B-hYg" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="90" id="8al-BQ-kf4"/>
+                            <constraint firstAttribute="trailing" secondItem="bqi-Jp-XVa" secondAttribute="trailing" constant="-42" id="FrF-ig-zVC"/>
+                            <constraint firstItem="ht7-q2-bRL" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Mb5-Gd-Sy3"/>
+                            <constraint firstItem="1Sp-6B-hYg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="-1" id="aMw-pR-8tg"/>
+                            <constraint firstItem="VAg-sZ-pGa" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-84" id="my7-sf-O0g"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="VAg-sZ-pGa" secondAttribute="bottom" constant="77" id="st0-Ft-WfE"/>
+                            <constraint firstItem="ht7-q2-bRL" firstAttribute="top" secondItem="1Sp-6B-hYg" secondAttribute="bottom" constant="44" id="wnq-Dg-eue"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="bqi-Jp-XVa" secondAttribute="bottom" constant="95" id="x72-3k-3yL"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                 </viewController>
@@ -59,7 +81,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cake" width="600" height="600"/>
-        <image name="dog" width="600" height="600"/>
+        <image name="cake" width="400" height="400"/>
+        <image name="dog" width="400" height="400"/>
     </resources>
 </document>

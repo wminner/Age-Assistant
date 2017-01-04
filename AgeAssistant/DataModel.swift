@@ -22,9 +22,9 @@ class DataModel {
     }
     
     init() {
+        registerDefaults()
         loadAgelist()
         loadTaglist()
-        registerDefaults()
         print(documentsDirectory())
     }
     
@@ -80,6 +80,7 @@ class DataModel {
     func registerDefaults() {
         let dictionary: [String: Any] = ["AgeIndex": -1,
                                          "AgeID": 0,
+                                         "FirstTime": true,
                                          "SortBy": "Name",
                                          "OrderBy": "Ascending"]
         UserDefaults.standard.register(defaults: dictionary)
