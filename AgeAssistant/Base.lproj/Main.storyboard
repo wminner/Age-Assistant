@@ -458,10 +458,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cake" width="600" height="600"/>
-        <image name="dog" width="600" height="600"/>
-        <image name="help" width="66" height="66"/>
-        <image name="settings" width="260" height="260"/>
+        <image name="cake" width="400" height="400"/>
+        <image name="dog" width="400" height="400"/>
+        <image name="help" width="171" height="171"/>
+        <image name="settings" width="173" height="173"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AD9-cU-D67"/>
