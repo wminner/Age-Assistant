@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Wesley Minner" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xS-gW-OdT">
-                                <rect key="frame" x="103" y="179" width="169" height="45"/>
+                                <rect key="frame" x="103.5" y="179" width="168.5" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="uLx-rJ-rjA"/>
                                 </constraints>
@@ -86,6 +86,9 @@
                                     <constraint firstAttribute="width" constant="50" id="ybg-25-1fQ"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="help"/>
+                                <connections>
+                                    <segue destination="ppG-zX-qNd" kind="show" id="evn-1N-gLw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -120,10 +123,10 @@
             </objects>
             <point key="canvasLocation" x="932" y="-180.35982008995504"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Settings-->
         <scene sceneID="gOB-pP-YDe">
             <objects>
-                <tableViewController id="kOp-ds-ZkX" customClass="SettingsViewController" customModule="AgeAssistant" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Settings" id="kOp-ds-ZkX" customClass="SettingsViewController" customModule="AgeAssistant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="D8Z-Jb-TEE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -248,7 +251,39 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZW-DZ-WH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="932" y="558.17091454272872"/>
+            <point key="canvasLocation" x="932" y="564"/>
+        </scene>
+        <!--Help-->
+        <scene sceneID="sg1-LV-hAl">
+            <objects>
+                <viewController title="Help" id="ppG-zX-qNd" customClass="HelpViewController" customModule="AgeAssistant" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="n3m-3F-1Q9"/>
+                        <viewControllerLayoutGuide type="bottom" id="qYW-d3-Dke"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a5h-YZ-da4" userLabel="RootView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xou-lC-BZi">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xou-lC-BZi" firstAttribute="leading" secondItem="a5h-YZ-da4" secondAttribute="leading" id="6Tu-RL-tKw"/>
+                            <constraint firstItem="xou-lC-BZi" firstAttribute="bottom" secondItem="qYW-d3-Dke" secondAttribute="top" id="Ie4-DR-7MJ"/>
+                            <constraint firstItem="xou-lC-BZi" firstAttribute="top" secondItem="a5h-YZ-da4" secondAttribute="top" id="KHM-Qp-Fuf"/>
+                            <constraint firstItem="xou-lC-BZi" firstAttribute="trailing" secondItem="a5h-YZ-da4" secondAttribute="trailing" id="sK8-1X-sRH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="xou-lC-BZi" id="Yom-XF-4lI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bFS-Ha-vcd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1688.8" y="563.56821589205401"/>
         </scene>
         <!--Ages-->
         <scene sceneID="xLC-2h-sqL">
