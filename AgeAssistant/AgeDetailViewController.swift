@@ -175,6 +175,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
         if let item = ageToEdit {
             title = "Edit Age"
             nameField.text = "\(item.name)"
+            nameField.delegate = self
             ageLabel.text = "Age: \(item.age)"
             
             // Date
@@ -188,7 +189,15 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
         } else {
             updateDateLabel()
             tagsLabel.text = ""
+            nameField.becomeFirstResponder()
+            nameField.delegate = self
         }
+    }
+    
+    // End editing text field when return key is pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

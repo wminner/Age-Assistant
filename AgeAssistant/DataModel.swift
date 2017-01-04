@@ -79,13 +79,32 @@ class DataModel {
     
     func registerDefaults() {
         let dictionary: [String: Any] = ["AgeIndex": -1,
-                                         "AgeID": 0]
+                                         "AgeID": 0,
+                                         "SortBy": "Name",
+                                         "OrderBy": "Ascending"]
         UserDefaults.standard.register(defaults: dictionary)
     }
     
     func sortAgelist() {
-        agelist.sort(by: { age1, age2 in
-            return age1.name.localizedStandardCompare(age2.name) == .orderedAscending })
+        let userDefaults = UserDefaults.standard
+        let sortBy = userDefaults.string(forKey: "SortBy")!
+        let orderBy = userDefaults.string(forKey: "OrderBy")!
+        switch (sortBy, orderBy) {
+        case ("Name", "Ascending"):
+            agelist.sort(by: { age1, age2 in
+                return age1.name.localizedStandardCompare(age2.name) == .orderedAscending })
+        case ("Name", "Descending"):
+            agelist.sort(by: { age1, age2 in
+                return age1.name.localizedStandardCompare(age2.name) == .orderedDescending })
+        case ("Age", "Ascending"):
+            agelist.sort(by: { age1, age2 in
+                return age1.age <= age2.age })
+        case ("Age", "Descending"):
+            agelist.sort(by: { age1, age2 in
+                return age1.age >= age2.age })
+        default: // Should never happen
+            print("Invalid setting")
+        }
     }
     
     class func nextAgeID() -> Int {

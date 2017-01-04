@@ -16,6 +16,7 @@ class StartViewController: UIViewController {
         if segue.identifier == "StartSegue" {
             let controller = segue.destination as! AgeListViewController            
             controller.dataModel = dataModel
+            dataModel.sortAgelist()
         }
     }
 }

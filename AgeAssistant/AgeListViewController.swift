@@ -19,6 +19,10 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
     var filteredAges = [Age]()
     let searchController = UISearchController(searchResultsController: nil)
     
+    deinit {
+        // Needed to prevent warning about searchController causing undefined behavior if trying to load view while parent is deallocating
+        searchController.removeFromParentViewController()
+    }
     
     func ageDetailViewControllerDidCancel(_ controller: AgeDetailViewController) {
         dismiss(animated: true, completion: nil)
@@ -141,6 +145,11 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         tableView.reloadData()
     }
     

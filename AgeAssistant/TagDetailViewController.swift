@@ -141,7 +141,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
     
     // Taps accessory button to edit tag
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let textField = tableView.cellForRow(at: indexPath)?.viewWithTag(1) as! UITextField
+        let textField = tableView.cellForRow(at: indexPath)!.viewWithTag(1) as! UITextField
         editingStartTag = textField.text
         editingIndexPath = indexPath
         textField.isUserInteractionEnabled = true
