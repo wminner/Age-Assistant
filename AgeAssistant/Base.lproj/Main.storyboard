@@ -28,13 +28,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age Assistant" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoC-RJ-mZN">
-                                <rect key="frame" x="15" y="110" width="343" height="69"/>
+                                <rect key="frame" x="15" y="142" width="343" height="37"/>
                                 <fontDescription key="fontDescription" name="BalsamiqSans" family="Balsamiq Sans" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Wesley Minner" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xS-gW-OdT">
-                                <rect key="frame" x="103.5" y="179" width="168.5" height="45"/>
+                                <rect key="frame" x="104" y="179" width="168.5" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="uLx-rJ-rjA"/>
                                 </constraints>
@@ -46,13 +46,13 @@
                                 <rect key="frame" x="-84" y="360" width="230" height="230"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="b3n-3b-dyt"/>
-                                    <constraint firstAttribute="height" constant="230" id="fPY-K2-JH4"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="230" id="fPY-K2-JH4"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cake" translatesAutoresizingMaskIntoConstraints="NO" id="dax-bU-gET">
                                 <rect key="frame" x="221" y="376" width="196" height="196"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="196" id="JZ0-qK-KYZ"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="196" id="JZ0-qK-KYZ"/>
                                     <constraint firstAttribute="width" constant="196" id="Oeh-8y-9d6"/>
                                 </constraints>
                             </imageView>
@@ -100,8 +100,8 @@
                             <constraint firstItem="9x2-c7-1ag" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-84" id="CDQ-uh-Vio"/>
                             <constraint firstItem="X6S-h9-iJD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CX1-DI-4yS"/>
                             <constraint firstItem="9x2-c7-1ag" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-84" id="Cku-7J-PUu"/>
+                            <constraint firstItem="9x2-c7-1ag" firstAttribute="top" relation="greaterThanOrEqual" secondItem="X6S-h9-iJD" secondAttribute="bottom" constant="10" id="Cnr-fk-zB6"/>
                             <constraint firstItem="PWR-zr-8Kn" firstAttribute="top" secondItem="9x2-c7-1ag" secondAttribute="bottom" constant="7" id="HyS-dX-SQ5"/>
-                            <constraint firstAttribute="trailing" secondItem="dax-bU-gET" secondAttribute="trailing" constant="-42" id="IFU-MO-0FK"/>
                             <constraint firstItem="9xS-gW-OdT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kmh-xm-Y1R"/>
                             <constraint firstAttribute="trailing" secondItem="dax-bU-gET" secondAttribute="trailing" constant="-42" id="LzX-81-WFk"/>
                             <constraint firstAttribute="trailing" secondItem="KCa-FL-rdC" secondAttribute="trailing" constant="16" id="S0n-hs-8gZ"/>
@@ -110,7 +110,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="yoC-RJ-mZN" secondAttribute="trailing" constant="1" id="Wax-sB-T1j"/>
                             <constraint firstItem="X6S-h9-iJD" firstAttribute="top" secondItem="9xS-gW-OdT" secondAttribute="bottom" constant="26" id="pL4-cs-feW"/>
                             <constraint firstItem="9xS-gW-OdT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="115" id="pim-Mh-Hvx"/>
-                            <constraint firstItem="yoC-RJ-mZN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="46" id="tB4-ka-gk6"/>
+                            <constraint firstItem="dax-bU-gET" firstAttribute="top" relation="greaterThanOrEqual" secondItem="X6S-h9-iJD" secondAttribute="bottom" constant="10" id="ukH-eb-y4Q"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PWR-zr-8Kn" secondAttribute="bottom" constant="20" id="xGp-x6-8Wg"/>
                         </constraints>
                     </view>

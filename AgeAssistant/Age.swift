@@ -125,7 +125,7 @@ class Age: NSObject, NSCoding {
         removeNotification()
         if shouldRemind {
             // Set remindDate to be at most 1 year from now
-            remindDate = roundDateToClosestYear(date: remindDate)
+            // remindDate = roundDateToClosestYear(date: remindDate)
             
             let content = UNMutableNotificationContent()
             content.title = "Reminder:"

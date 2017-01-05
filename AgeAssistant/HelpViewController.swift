@@ -16,7 +16,9 @@ class HelpViewController: UIViewController {
         super.viewDidLoad()
         
         let contentWidth: CGFloat = self.view.frame.width
-        let contentHeight: CGFloat = 1000
+        let contentHeight: CGFloat = 1200
+        
+        print("contentWidth is \(contentWidth)")
         
         let contentVc = HelpContentViewController(nibName: "HelpContentViewController", bundle: nil)
         contentVc.view.frame = CGRect(x: 0, y: 0, width: contentWidth, height: contentHeight)

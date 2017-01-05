@@ -171,7 +171,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
     func updateDateLabel() {
         let formatter = DateFormatter()
         // formatter.dateStyle = .short
-        formatter.dateFormat = "MMMM d, yyyy"
+        formatter.dateFormat = "MMM d, yyyy"
         dateLabel.text = formatter.string(from: date)
     }
     
@@ -179,7 +179,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
         let formatter = DateFormatter()
         // formatter.dateStyle = .short
         // formatter.timeStyle = .short
-        formatter.dateFormat = "MMMM d, h:mm a"
+        formatter.dateFormat = "MMM d, yyyy; h:mm a"
         remindDateLabel.text = formatter.string(from: remindDate)
     }
     
@@ -295,6 +295,9 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
         }
         
         updateRemindDateLabel()
+        let today = Date()
+        remindDatePicker.minimumDate = today
+        remindDatePicker.maximumDate = addYearsToDate(date: today, years: 1)
     }
     
     // End editing text field when return key is pressed

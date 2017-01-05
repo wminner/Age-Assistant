@@ -33,3 +33,11 @@ func roundDateToClosestYear(date: Date) -> Date {
     }
     return newdate
 }
+
+func addYearsToDate(date: Date, years: Int) -> Date {
+    var comp = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute], from: date)
+    comp.year = comp.year! + years
+    
+    let newdate = Calendar.current.date(from: comp)!
+    return newdate
+}
