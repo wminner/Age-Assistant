@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Wesley Minner" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xS-gW-OdT">
-                                <rect key="frame" x="104" y="179" width="168.5" height="45"/>
+                                <rect key="frame" x="103" y="179" width="169" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="uLx-rJ-rjA"/>
                                 </constraints>
@@ -182,12 +182,36 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="fMr-Pv-YcI">
+                                        <rect key="frame" x="0.0" y="144" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fMr-Pv-YcI" id="Jr1-uk-2IF">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BbZ-VG-4y2">
+                                                    <rect key="frame" x="38" y="6" width="270" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="√" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBh-vG-5Qd">
+                                                    <rect key="frame" x="17" y="10" width="12" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Order" id="Xvg-Zq-YxI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="B8i-Mr-wt2">
-                                        <rect key="frame" x="0.0" y="201" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="245" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B8i-Mr-wt2" id="eHU-Jn-UdH">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -211,7 +235,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="TkI-np-4RI">
-                                        <rect key="frame" x="0.0" y="245" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="289" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TkI-np-4RI" id="Qva-BG-Qfa">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -246,6 +270,7 @@
                         <outlet property="ageCheckLabel" destination="jpB-iz-NlF" id="QG0-Uv-UgG"/>
                         <outlet property="ascendCheckLabel" destination="9oK-ES-hvJ" id="iJq-hB-nel"/>
                         <outlet property="descendCheckLabel" destination="ihd-5U-RXX" id="5KF-x9-hQG"/>
+                        <outlet property="monthCheckLabel" destination="EBh-vG-5Qd" id="SeU-uu-0AA"/>
                         <outlet property="nameCheckLabel" destination="Goa-Gb-lPF" id="0R1-Ld-wLj"/>
                     </connections>
                 </tableViewController>

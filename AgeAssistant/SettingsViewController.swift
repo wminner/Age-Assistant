@@ -12,6 +12,7 @@ class SettingsViewController: UITableViewController {
 
     @IBOutlet weak var nameCheckLabel: UILabel!
     @IBOutlet weak var ageCheckLabel: UILabel!
+    @IBOutlet weak var monthCheckLabel: UILabel!
     @IBOutlet weak var ascendCheckLabel: UILabel!
     @IBOutlet weak var descendCheckLabel: UILabel!
     
@@ -31,9 +32,15 @@ class SettingsViewController: UITableViewController {
         case "Name":
             nameCheckLabel.text = "√"
             ageCheckLabel.text = ""
+            monthCheckLabel.text = ""
         case "Age":
             nameCheckLabel.text = ""
             ageCheckLabel.text = "√"
+            monthCheckLabel.text = ""
+        case "Month":
+            nameCheckLabel.text = ""
+            ageCheckLabel.text = ""
+            monthCheckLabel.text = "√"
         case "Ascending":
             ascendCheckLabel.text = "√"
             descendCheckLabel.text = ""
@@ -49,7 +56,7 @@ class SettingsViewController: UITableViewController {
     func setSetting(_ setting: String) {
         let userDefaults = UserDefaults.standard
         switch setting {
-        case "Name", "Age":
+        case "Name", "Age", "Month":
             userDefaults.set(setting, forKey: "SortBy")
         case "Ascending", "Descending":
             userDefaults.set(setting, forKey: "OrderBy")
@@ -71,7 +78,11 @@ class SettingsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        if section == 0 {
+            return 3
+        } else { // section == 1
+            return 2
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -99,10 +99,20 @@ class DataModel {
                 return age1.name.localizedStandardCompare(age2.name) == .orderedDescending })
         case ("Age", "Ascending"):
             agelist.sort(by: { age1, age2 in
-                return age1.age <= age2.age })
+                return age1.date >= age2.date })
         case ("Age", "Descending"):
             agelist.sort(by: { age1, age2 in
-                return age1.age >= age2.age })
+                return age1.date <= age2.date })
+        case ("Month", "Ascending"):
+            agelist.sort(by: { age1, age2 in
+                let m1 = Calendar.current.component(.month, from: age1.date)
+                let m2 = Calendar.current.component(.month, from: age2.date)
+                return m1 <= m2 })
+        case ("Month", "Descending"):
+            agelist.sort(by: { age1, age2 in
+                let m1 = Calendar.current.component(.month, from: age1.date)
+                let m2 = Calendar.current.component(.month, from: age2.date)
+                return m1 >= m2 })
         default: // Should never happen
             print("Invalid setting")
         }

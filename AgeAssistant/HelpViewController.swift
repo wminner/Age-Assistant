@@ -18,10 +18,11 @@ class HelpViewController: UIViewController {
         let contentWidth: CGFloat = self.view.frame.width
         let contentHeight: CGFloat = 1200
         
-        print("contentWidth is \(contentWidth)")
+        // print("contentWidth is \(contentWidth)")
         
         let contentVc = HelpContentViewController(nibName: "HelpContentViewController", bundle: nil)
         contentVc.view.frame = CGRect(x: 0, y: 0, width: contentWidth, height: contentHeight)
+        // contentVc.view.translatesAutoresizingMaskIntoConstraints = false
         self.addChildViewController(contentVc)
         self.scrollView.addSubview(contentVc.view)
         contentVc.didMove(toParentViewController: self)
