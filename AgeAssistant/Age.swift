@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 // Class to keep track of something's age
 class Age: NSObject, NSCoding {
@@ -15,6 +16,9 @@ class Age: NSObject, NSCoding {
     var age: Int = 0
     var tags = Set<String>()
     var ageID: Int
+    
+    var remindDate = Date()
+    var shouldRemind = false
     
     override init() {
         ageID = DataModel.nextAgeID()
@@ -44,7 +48,15 @@ class Age: NSObject, NSCoding {
         age = aDecoder.decodeInteger(forKey: "Age")
         tags = aDecoder.decodeObject(forKey: "Tags") as! Set<String>
         ageID = aDecoder.decodeInteger(forKey: "AgeID")
+        
+        remindDate = aDecoder.decodeObject(forKey: "RemindDate") as! Date
+        shouldRemind = aDecoder.decodeBool(forKey: "ShouldRemind")
+        
         super.init()
+    }
+    
+    deinit {
+        removeNotification()
     }
     
     func encode(with aCoder: NSCoder) {
@@ -53,6 +65,9 @@ class Age: NSObject, NSCoding {
         aCoder.encode(age, forKey: "Age")
         aCoder.encode(tags, forKey: "Tags")
         aCoder.encode(ageID, forKey: "AgeID")
+        
+        aCoder.encode(remindDate, forKey: "RemindDate")
+        aCoder.encode(shouldRemind, forKey: "ShouldRemind")
     }
     
     // Use the date given to calculate object's age
@@ -69,13 +84,15 @@ class Age: NSObject, NSCoding {
         
         // Calculate the age and assign it if valid
         let age_result = Age.calculateAge(date)
-        if age_result >= 0 {
-            self.age = age_result
-            // print("Assigning age of \(self.name) to \(self.age).")
-            return true
-        } else {
-            return false
-        }
+        self.age = age_result
+        
+        return true
+//        if age_result >= 0 {
+//            self.age = age_result
+//            return true
+//        } else {
+//            return false
+//        }
     }
     
     // For convenience
@@ -101,6 +118,36 @@ class Age: NSObject, NSCoding {
     func clearTags() {
         self.tags = Set<String>()
     }
+    
+    // User does not know year they are scheduling using date picker
+    // Schedule notification at most 1 year in the future (or edit year to satisfy this condition)
+    func scheduleNotification() {
+        removeNotification()
+        if shouldRemind {
+            // Set remindDate to be at most 1 year from now
+            remindDate = roundDateToClosestYear(date: remindDate)
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Reminder:"
+            content.body = "Important day for \(name)"
+            content.sound = UNNotificationSound.default()
+            
+            let calendar = Calendar(identifier: .gregorian)
+            let components = calendar.dateComponents([.month, .day, .hour, .minute], from: remindDate)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+            let request = UNNotificationRequest(identifier: "\(ageID)", content: content, trigger: trigger)
+            let center = UNUserNotificationCenter.current()
+            center.add(request)
+            
+            print("Scheduled notification \(request) for ageID \(ageID)")
+        }
+    }
+    
+    func removeNotification() {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: ["\(ageID)"])
+    }
+    
     
     // Static method to calculate age in years from given date
     class func calculateAge(_ fromDate: Date) -> Int {

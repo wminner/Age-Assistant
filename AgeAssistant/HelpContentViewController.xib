@@ -47,7 +47,7 @@
                     <fontDescription key="fontDescription" name="BalsamiqSans" family="Balsamiq Sans" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" text="Start by adding Age profiles of your friends, family, pets, or whatever you want!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qbx-vE-jop">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" text="Start by adding Age profiles of your friends, family, anniversaries, pets, or whatever you want!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qbx-vE-jop">
                     <rect key="frame" x="16" y="41" width="343" height="72"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>

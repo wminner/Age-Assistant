@@ -16,7 +16,6 @@ class HelpViewController: UIViewController {
         super.viewDidLoad()
         
         let contentWidth: CGFloat = self.view.frame.width
-        print(contentWidth)
         let contentHeight: CGFloat = 1000
         
         let contentVc = HelpContentViewController(nibName: "HelpContentViewController", bundle: nil)

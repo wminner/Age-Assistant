@@ -19,3 +19,17 @@ func makeDate(year: Int, month: Int, day: Int) -> Date? {
     let date = Calendar.current.date(from: comp)
     return date
 }
+
+func roundDateToClosestYear(date: Date) -> Date {
+    let today = Date()
+    let currYear = Calendar.current.component(.year, from: today)
+    var comp = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute], from: date)
+    comp.year = currYear
+    
+    var newdate = Calendar.current.date(from: comp)!
+    if newdate < today {
+        comp.year = currYear + 1
+        newdate = Calendar.current.date(from: comp)!
+    }
+    return newdate
+}
