@@ -59,8 +59,9 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
                 return stringMatch != nil ? true : false
             }
             let birthMonth = Calendar.current.component(.month, from: age.date)
+            let birthYear = Calendar.current.component(.year, from: age.date)
             let birthMonthString = getMonthString(month: birthMonth)
-            return age.name.lowercased().contains(searchText.lowercased()) || !filteredTags.isEmpty || String(age.age).contains(searchText.lowercased()) || birthMonthString.contains(searchText.lowercased())
+            return age.name.lowercased().contains(searchText.lowercased()) || !filteredTags.isEmpty || String(age.age).contains(searchText.lowercased()) || birthMonthString.contains(searchText.lowercased()) || String(birthYear).contains(searchText.lowercased())
         }
         tableView.reloadData()
     }
