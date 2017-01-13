@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Wesley Minner" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xS-gW-OdT">
-                                <rect key="frame" x="103" y="179" width="169" height="45"/>
+                                <rect key="frame" x="103.5" y="179" width="168.5" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="uLx-rJ-rjA"/>
                                 </constraints>
@@ -397,7 +397,7 @@
         <scene sceneID="haE-Gm-j6r">
             <objects>
                 <navigationController id="3Ml-8R-fEp" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pby-p9-kmh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pby-p9-kmh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -455,6 +455,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -483,6 +484,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -511,6 +513,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <segue destination="SkH-T4-VE1" kind="show" identifier="EditTagsSegue" id="a5c-pV-fGR"/>
                                         </connections>
@@ -569,6 +572,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -719,7 +723,7 @@
         <scene sceneID="G3O-lB-4x7">
             <objects>
                 <navigationController storyboardIdentifier="AgeDetailNavigationController" id="fKT-r5-Tf6" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SvH-I2-a4B">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="SvH-I2-a4B">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

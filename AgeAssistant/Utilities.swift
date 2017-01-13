@@ -20,6 +20,15 @@ func makeDate(year: Int, month: Int, day: Int) -> Date? {
     return date
 }
 
+func setDateTime(toHour hour: Int, toMinute minute: Int, date: Date) -> Date {
+    var comp = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute], from: date)
+    comp.hour = hour
+    comp.minute = minute
+    
+    let newdate = Calendar.current.date(from: comp)!
+    return newdate
+}
+
 func roundDateToClosestYear(date: Date) -> Date {
     let today = Date()
     let currYear = Calendar.current.component(.year, from: today)

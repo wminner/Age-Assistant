@@ -98,6 +98,13 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
             center.requestAuthorization(options: [.alert, .sound]) {
                 granted, error in /* do nothing */
             }
+            
+            // Set remind date to birthday, at noon, if this is a new age profile
+            if ageToEdit == nil {
+                let defaultRemindDate = roundDateToClosestYear(date: date)
+                remindDate = setDateTime(toHour: 12, toMinute: 0, date: defaultRemindDate)
+                updateRemindDateLabel()
+            }
         }
     }
     
@@ -292,12 +299,14 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
             tagsLabel.text = ""
             nameField.becomeFirstResponder()
             nameField.delegate = self
+            remindDate = setDateTime(toHour: 12, toMinute: 0, date: remindDate)
         }
         
         updateRemindDateLabel()
         let today = Date()
         remindDatePicker.minimumDate = today
         remindDatePicker.maximumDate = addYearsToDate(date: today, years: 1)
+        remindDatePicker.minuteInterval = 5
     }
     
     // End editing text field when return key is pressed

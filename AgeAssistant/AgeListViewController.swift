@@ -25,6 +25,11 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
     }
     
     func ageDetailViewControllerDidCancel(_ controller: AgeDetailViewController) {
+        // Dismiss the searchController if necessary
+        if searchController.isActive {
+            dismiss(animated: false, completion: nil)
+        }
+        // Then dismiss the popup
         dismiss(animated: true, completion: nil)
     }
     
@@ -85,18 +90,9 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
             }
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-                
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.isActive && searchController.searchBar.text != "" {
+        if searchController.searchBar.text != "" {
             return filteredAges.count
         }
         return dataModel.agelist.count
@@ -114,7 +110,7 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         let tags = cell.viewWithTag(4) as! UILabel
         
         let ageObj: Age
-        if searchController.isActive && searchController.searchBar.text != "" {
+        if searchController.searchBar.text != "" {
             ageObj = self.filteredAges[indexPath.row]
         } else {
             ageObj = dataModel.agelist[indexPath.row]
@@ -156,6 +152,15 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         tableView.reloadData()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddAgeSegue" {
             let navigationController = segue.destination as! UINavigationController
@@ -170,7 +175,11 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
             controller.delegate = self
             controller.dataModel = dataModel
             if let indexPath = sender as? IndexPath {
-                controller.ageToEdit = dataModel.agelist[indexPath.row]
+                if searchController.searchBar.text != "" {
+                    controller.ageToEdit = self.filteredAges[indexPath.row]
+                } else {
+                    controller.ageToEdit = dataModel.agelist[indexPath.row]
+                }
             }
         }
     }
