@@ -118,6 +118,12 @@ class DataModel {
         }
     }
     
+    func updateAllAges() {
+        for age in agelist {
+            let _ = age.updateAge()
+        }
+    }
+    
     class func nextAgeID() -> Int {
         let userDefaults = UserDefaults.standard
         let itemID = userDefaults.integer(forKey: "AgeID")

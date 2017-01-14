@@ -87,12 +87,6 @@ class Age: NSObject, NSCoding {
         self.age = age_result
         
         return true
-//        if age_result >= 0 {
-//            self.age = age_result
-//            return true
-//        } else {
-//            return false
-//        }
     }
     
     // For convenience
@@ -151,9 +145,11 @@ class Age: NSObject, NSCoding {
     
     // Static method to calculate age in years from given date
     class func calculateAge(_ fromDate: Date) -> Int {
-        let calendar: Calendar = Calendar.current
-        let ageComponents = calendar.dateComponents([.year], from: fromDate, to: Date())
-        return ageComponents.year!
+        // print("fromDate = \(fromDate)")
+        // print("today = \(Date())")
+        
+        let dateComp = Calendar.current.dateComponents([.year], from: fromDate, to: Date())
+        return dateComp.year!
     }
     
     // Pass in array of tags to get formatted tagsString

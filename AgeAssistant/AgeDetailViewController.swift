@@ -79,6 +79,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
     }
     
     @IBAction func dateChanged(_ datePicker: UIDatePicker) {
+        // date = setDateTime(toHour: 0, toMinute: 0, date: datePicker.date)
         date = datePicker.date
         updateDateLabel()
         updateAgeLabel()
@@ -177,7 +178,7 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
     
     func updateDateLabel() {
         let formatter = DateFormatter()
-        // formatter.dateStyle = .short
+        // formatter.timeZone = TimeZone(abbreviation: "GMT")
         formatter.dateFormat = "MMM d, yyyy"
         dateLabel.text = formatter.string(from: date)
     }
@@ -307,6 +308,8 @@ class AgeDetailViewController: UITableViewController, UITextFieldDelegate, TagDe
         remindDatePicker.minimumDate = today
         remindDatePicker.maximumDate = addYearsToDate(date: today, years: 1)
         remindDatePicker.minuteInterval = 5
+        
+        // datePicker.timeZone = TimeZone(abbreviation: "GMT")
     }
     
     // End editing text field when return key is pressed

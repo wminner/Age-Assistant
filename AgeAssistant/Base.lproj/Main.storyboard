@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Wesley Minner" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xS-gW-OdT">
-                                <rect key="frame" x="103" y="179" width="169" height="45"/>
+                                <rect key="frame" x="103.5" y="179" width="168.5" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="uLx-rJ-rjA"/>
                                 </constraints>

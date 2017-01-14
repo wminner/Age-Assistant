@@ -115,8 +115,10 @@ class AgeListViewController: UITableViewController, AgeDetailViewControllerDeleg
         } else {
             ageObj = dataModel.agelist[indexPath.row]
         }
+        let _ = ageObj.updateAge()
         
         let dateFormatter = DateFormatter()
+        // dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.dateFormat = "MM/dd/yyyy"
         let formattedDate = dateFormatter.string(from: ageObj.date)
         
