@@ -26,6 +26,7 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
     var delTags = [String]()
     
     
+    // Click plus button (add tag button) at top right
     @IBAction func addNewTag() {
         // Force any edits in progress to stop
         tableView.endEditing(false)
@@ -150,8 +151,9 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
     
     // TextField methods
     func textFieldDidEndEditing(_ textField: UITextField) {
+        // Stopped editing with blank/empty tag
         if textField.text == "" {
-            if dataModel.taglist.contains(editingStartTag!) {
+            if editingStartTag != nil && dataModel.taglist.contains(editingStartTag!) {
                 delTags.append(editingStartTag!)
             }
             
@@ -161,10 +163,12 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
             tagSelection.remove(at: editingIndexPath!.row)
             tableView.deleteRows(at: [editingIndexPath!], with: .none)
             tableView.endUpdates()
-        } else {
+        } else {  // Stopped editing with non-empty tag
             // Add tag to the edited tags list, for cleaning up other Age objects later
             if !addingTag {
-                editTags.append((editingStartTag!, textField.text!))
+                if editingStartTag != nil {
+                    editTags.append((editingStartTag!, textField.text!))
+                }
             } else {
                 addingTag = false
             }
@@ -173,7 +177,6 @@ class TagDetailViewController: UITableViewController, UITextFieldDelegate {
         editingIndexPath = nil
         editingStartTag = nil
         textField.isUserInteractionEnabled = false
-        
     }
     
     // Prevent spaces in tags
